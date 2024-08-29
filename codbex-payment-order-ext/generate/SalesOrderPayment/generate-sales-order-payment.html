@@ -22,11 +22,31 @@
             <div class="dialog-content">
                 <div class="title">Generate Sales Order Payment</div>
                 <div class="line"></div>
-
-                <div class="dialog-buttons">
-                    <button ng-click="generateGoodsReceiptFromInvoice()" class="button">Yes</button>
-                    <button ng-click="closeDialog()" class="button">No</button>
+                <div class="main-text">
+                    <p>Which sales order would you like to attach to this payment?</p>
                 </div>
+                <fd-scrollbar class="dg-full-height">
+                    <fd-fieldset ng-form="forms.details">
+                        <fd-form-group name="entityForm" class="fd-container fd-form-layout-grid-container">
+                            <fd-form-item ng-repeat="item in SalesOrders">
+                                <div class="dialog-select">
+                                    <input type="checkbox" ng-model="item.selected" />
+                                    <p>{{item.Number}}</p>
+                                </div>
+                            </fd-form-item>
+                            <fd-bar class="dialog-buttons" bar-design="footer" compact="true"
+                                ng-show="action !== 'select'">
+                                <fd-bar-right>
+                                    <fd-bar-element>
+                                        <fd-button class="button" dg-label="Generate" dg-type="emphasized"
+                                            ng-click="generateSalesOrderPayment()">
+                                        </fd-button>
+                                    </fd-bar-element>
+                                </fd-bar-right>
+                            </fd-bar>
+                        </fd-form-group>
+                    </fd-fieldset>
+                </fd-scrollbar>
             </div>
         </div>
     </body>
