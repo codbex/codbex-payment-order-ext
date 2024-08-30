@@ -1,5 +1,6 @@
 import { SalesOrderRepository as SalesOrderDao } from "../../../../codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderRepository";
 import { CustomerPaymentRepository as CustomerPaymentDao } from "../../../../codbex-payments/gen/codbex-payments/dao/CustomerPayment/CustomerPaymentRepository";
+import { SalesOrderPaymentRepository as SalesOrderPaymentDao } from "../../../../codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderPaymentRepository";
 
 import { Controller, Get } from "sdk/http";
 
@@ -8,10 +9,12 @@ class GenerateSalesOrderPaymentService {
 
     private readonly salesOrderDao;
     private readonly customerPaymentDao;
+    private readonly salesOrderPaymentDao
 
     constructor() {
         this.salesOrderDao = new SalesOrderDao();
         this.customerPaymentDao = new CustomerPaymentDao();
+        this.salesOrderPaymentDao = new SalesOrderPaymentDao();
     }
 
     @Get("/salesOrderData/:customerPaymentId")
@@ -28,8 +31,27 @@ class GenerateSalesOrderPaymentService {
             }
         });
 
+        let notPaidOrders = [];
+
+        salesOrder.forEach((order) => {
+
+            let salesOrderPayments = this.salesOrderPaymentDao.findAll({
+                $filter: {
+                    equals: {
+                        CustomerPayment: customerPayment.Id,
+                        SalesOrder: order.Id,
+                    }
+                }
+            });
+
+            if (salesOrderPayments.length == 0) {
+                notPaidOrders.push(order);
+            }
+
+        });
+
         return {
-            "salesOrder": salesOrder
+            "salesOrder": notPaidOrders
         };
     }
 
