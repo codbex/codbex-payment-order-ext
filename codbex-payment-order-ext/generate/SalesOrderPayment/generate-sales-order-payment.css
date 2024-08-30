@@ -15,6 +15,18 @@
             gap: 1.5em;
         }
 
+        .wide-form .dialog-content {
+            width: 50%;
+            max-width: 1200px;
+        }
+
+
+        .wide-form .fd-col-md--6,
+        .wide-form .fd-col-md--8 {
+            flex: 0 0 auto;
+            width: 60%;
+        }
+
         .dialog-content {
             background-color: white;
             width: 400px;
