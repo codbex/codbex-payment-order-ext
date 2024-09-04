@@ -35,7 +35,7 @@ class GenerateSalesOrderPaymentService {
 
         salesOrder.forEach((order) => {
 
-            let salesOrderPayments = this.salesOrderPaymentDao.findAll({
+            const salesOrderPayments = this.salesOrderPaymentDao.findAll({
                 $filter: {
                     equals: {
                         CustomerPayment: customerPayment.Id,
