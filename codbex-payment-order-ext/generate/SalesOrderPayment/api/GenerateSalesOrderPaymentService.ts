@@ -1,6 +1,6 @@
-import { SalesOrderRepository as SalesOrderDao } from "../../../../codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderRepository";
-import { CustomerPaymentRepository as CustomerPaymentDao } from "../../../../codbex-payments/gen/codbex-payments/dao/CustomerPayment/CustomerPaymentRepository";
-import { SalesOrderPaymentRepository as SalesOrderPaymentDao } from "../../../../codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderPaymentRepository";
+import { SalesOrderRepository as SalesOrderDao } from "codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderRepository";
+import { CustomerPaymentRepository as CustomerPaymentDao } from "codbex-payments/gen/codbex-payments/dao/CustomerPayment/CustomerPaymentRepository";
+import { SalesOrderPaymentRepository as SalesOrderPaymentDao } from "codbex-orders/gen/codbex-orders/dao/SalesOrder/SalesOrderPaymentRepository";
 
 import { Controller, Get } from "sdk/http";
 
@@ -21,9 +21,9 @@ class GenerateSalesOrderPaymentService {
     public salesOrderData(_: any, ctx: any) {
         const customerPaymentId = ctx.pathParameters.customerPaymentId;
 
-        let customerPayment = this.customerPaymentDao.findById(customerPaymentId);
+        const customerPayment = this.customerPaymentDao.findById(customerPaymentId);
 
-        let salesOrder = this.salesOrderDao.findAll({
+        const salesOrder = this.salesOrderDao.findAll({
             $filter: {
                 equals: {
                     Customer: customerPayment.Customer
@@ -59,7 +59,7 @@ class GenerateSalesOrderPaymentService {
     public customerPaymentData(_: any, ctx: any) {
         const customerPaymentId = ctx.pathParameters.customerPaymentId;
 
-        let customerPayment = this.customerPaymentDao.findById(customerPaymentId);
+        const customerPayment = this.customerPaymentDao.findById(customerPaymentId);
 
         return {
             "Id": customerPayment.Id,
