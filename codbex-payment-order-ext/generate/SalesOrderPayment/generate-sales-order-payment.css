@@ -9,6 +9,28 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
 
+        .dialog-select {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5em;
+        }
+
+        .dialog-select h3 {
+            margin: 0 auto;
+        }
+
+        .wide-form .dialog-content {
+            width: 50%;
+            max-width: 1200px;
+        }
+
+
+        .wide-form .fd-col-md--6,
+        .wide-form .fd-col-md--8 {
+            flex: 0 0 auto;
+            width: 60%;
+        }
+
         .dialog-content {
             background-color: white;
             width: 400px;
