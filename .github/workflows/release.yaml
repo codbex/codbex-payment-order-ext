@@ -15,11 +15,12 @@ jobs:
     uses: codbex/codbex-infra/.github/workflows/module-release.yaml@main
     with:
       packages: codbex-payment-order-ext
+      packages-build: codbex-payment-order-ext
       release-version: ${{ inputs.release-version }}
       release-content: |
         ## codbex-payment-order-ext - ${{ inputs.release-version }}
   
-        Warehouse Management - Data Sample
+        Payment Order Extension - Module
   
         ## Installation
   
